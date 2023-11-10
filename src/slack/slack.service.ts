@@ -1,9 +1,15 @@
 import { Injectable } from '@nestjs/common';
+import { SlackCommandDto } from './dto/slack-command.dto';
 
 @Injectable()
 export class SlackService {
-  break(body: any) {
-    console.log(body);
-    return 'Tu dois choisir quelle équipe invoquer ! (dnum, inter)';
+  break(slackCommandDto: SlackCommandDto) {
+    console.log(slackCommandDto);
+    const teams = slackCommandDto.text.split(' ');
+    if (teams.length === 0) {
+      return 'Tu dois choisir quelle équipe invoquer ! (dnum, inter)';
+    }
+    console.log(teams);
+    return 'ok';
   }
 }
